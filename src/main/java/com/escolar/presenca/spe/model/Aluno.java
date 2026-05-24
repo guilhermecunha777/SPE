@@ -29,7 +29,7 @@ public class Aluno {
     @JsonIgnoreProperties({"alunos"})
     private Turma turma;
 
-    @OneToMany(mappedBy = "alunos", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "aluno", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonIgnoreProperties({"alunos"})
     private List<Presenca> presencas;
 

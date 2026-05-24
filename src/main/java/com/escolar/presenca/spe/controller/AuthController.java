@@ -21,7 +21,7 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody Map<String, String> body) {
-        Optional<Professor> prof = authService.login(body.get("username"), body.get("senha"));
+        Optional<Professor> prof = authService.login(body.get("usuario"), body.get("senha"));
 
         if (prof.isPresent()) {
             Professor pf = prof.get();

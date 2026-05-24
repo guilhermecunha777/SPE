@@ -26,8 +26,8 @@ public class DataInitializer implements CommandLineRunner {
         if (turmaRepository.count() > 0) return;
 
         Turma turmaA = turmaRepository.save(Turma.builder().letra("A").aulasDia(4).build());
-        Turma turmaB = turmaRepository.save(Turma.builder().letra("B").aulasDia(1).build());
-        Turma turmaC = turmaRepository.save(Turma.builder().letra("C").aulasDia(2).build());
+        Turma turmaB = turmaRepository.save(Turma.builder().letra("B").aulasDia(5).build());
+        Turma turmaC = turmaRepository.save(Turma.builder().letra("C").aulasDia(3).build());
 
         List.of("Ana Beatriz Silva", "Bruno Oliveira", "Carla Mendes", "Diego Ferreira", "Eduarda Costa", "Felipe Rocha", "Gabriela Lima")
                 .forEach(nome -> alunoRepository.save(Aluno.builder().nome(nome).turma(turmaA).build()));

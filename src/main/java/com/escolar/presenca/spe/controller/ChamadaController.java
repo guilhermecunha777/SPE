@@ -1,7 +1,5 @@
 package com.escolar.presenca.spe.controller;
 
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.bind.annotation.*;
 import com.escolar.presenca.spe.dto.ChamadaRequest;
 import com.escolar.presenca.spe.model.Aluno;
 import com.escolar.presenca.spe.service.ChamadaService;
