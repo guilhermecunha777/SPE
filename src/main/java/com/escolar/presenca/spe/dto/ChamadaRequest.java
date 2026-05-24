@@ -14,7 +14,7 @@ public class ChamadaRequest {
     @Data
     public static class RegistroPresenca {
         private Long alunoId;
-        private boolean presenca;
+        private boolean presente;
         private int quantidadeFaltas;
     }
 }

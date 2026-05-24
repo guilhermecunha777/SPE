@@ -8,12 +8,14 @@ import com.escolar.presenca.spe.model.Turma;
 import com.escolar.presenca.spe.repository.AlunoRepository;
 import com.escolar.presenca.spe.repository.PresencaRepository;
 import com.escolar.presenca.spe.repository.TurmaRepository;
-import jakarta.transaction.Transactional;
+import com.escolar.presenca.spe.model.*;
+import com.escolar.presenca.spe.repository.*;
 import lombok.RequiredArgsConstructor;
-import org.hibernate.mapping.List;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
@@ -28,19 +30,17 @@ public class ChamadaService {
 
     @Transactional
     public void salvarChamada(ChamadaRequest request) {
-        LocalDate dataAtualizacao = LocalDate.now();
+        LocalDate hoje = LocalDate.now();
         for (ChamadaRequest.RegistroPresenca reg : request.getRegistros()) {
-            Aluno aluno = alunoRepository.findById(reg.getAlunoId()).orElseThrow(() -> new RuntimeException("aluno nao encontrado: " + reg.getAlunoId()));
-
-            if (presencaRepository.existsByAlunoIdAndData(aluno.getId(), dataAtualizacao)) continue;
-
+            Aluno aluno = alunoRepository.findById(reg.getAlunoId())
+                    .orElseThrow(() -> new RuntimeException("Aluno não encontrado: " + reg.getAlunoId()));
+            if (presencaRepository.existsByAlunoIdAndData(aluno.getId(), hoje)) continue;
             Presenca presenca = Presenca.builder()
                     .aluno(aluno)
-                    .data(dataAtualizacao)
-                    .presente(reg.isPresenca())
-                    .quantidadeFaltas(reg.isPresenca() ? 0 : reg.getQuantidadeFaltas())
+                    .data(hoje)
+                    .presente(reg.isPresente())
+                    .quantidadeFaltas(reg.isPresente() ? 0 : reg.getQuantidadeFaltas())
                     .build();
-
             presencaRepository.save(presenca);
         }
     }
@@ -58,6 +58,7 @@ public class ChamadaService {
             return new FrequenciaResponse(aluno.getId(), aluno.getNome(), turmaLetra, totalFaltas, totalAulas, freq, status);
         }).collect(Collectors.toList());
     }
+
     public List<Aluno> getAlunoDaTurma(String turmaLetra) {
         return alunoRepository.findByTurmaLetra(turmaLetra);
     }

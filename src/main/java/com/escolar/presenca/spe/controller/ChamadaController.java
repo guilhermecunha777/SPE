@@ -1,13 +1,14 @@
 package com.escolar.presenca.spe.controller;
 
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.*;
 import com.escolar.presenca.spe.dto.ChamadaRequest;
-import com.escolar.presenca.spe.model.Turma;
+import com.escolar.presenca.spe.model.Aluno;
 import com.escolar.presenca.spe.service.ChamadaService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
-import org.springframework.web.bind.annotation.*;
 import java.util.Map;
 
 @RestController
@@ -18,7 +19,7 @@ public class ChamadaController {
     private final ChamadaService chamadaService;
 
     @GetMapping("/turma/{letra}")
-    public ResponseEntity<List<Turma>> getAlunosDaTurma(@PathVariable String letra) {
+    public ResponseEntity<List<Aluno>> getAlunosDaTurma(@PathVariable String letra) {
         return ResponseEntity.ok(chamadaService.getAlunoDaTurma(letra.toUpperCase()));
     }
 
