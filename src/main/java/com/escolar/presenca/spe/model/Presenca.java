@@ -31,4 +31,44 @@ public class Presenca {
 
     @Column(nullable = false)
     private int quantidadeFaltas;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Aluno getAluno() {
+        return aluno;
+    }
+
+    public void setAluno(Aluno aluno) {
+        this.aluno = aluno;
+    }
+
+    public LocalDate getData() {
+        return data;
+    }
+
+    public void setData(LocalDate data) {
+        this.data = data;
+    }
+
+    public boolean isPresente() {
+        return presente;
+    }
+
+    public void setPresente(boolean presente) {
+        this.presente = presente;
+    }
+
+    public int getQuantidadeFaltas() {
+        return quantidadeFaltas;
+    }
+
+    public void setQuantidadeFaltas(int quantidadeFaltas) {
+        this.quantidadeFaltas = quantidadeFaltas;
+    }
 }
